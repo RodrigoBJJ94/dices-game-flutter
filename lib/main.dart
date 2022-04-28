@@ -28,36 +28,53 @@ class DicesState extends State<Dices> {
   var leftDice = 1;
   var rightDice = 1;
 
-  void changeDices() {
-    setState(() {
-      leftDice = Random().nextInt(6) + 1;
-      rightDice = Random().nextInt(6) + 1;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        children: [
-          Expanded(
-            child: TextButton(
-              onPressed: () {
-                changeDices();
-              },
-              child: Image.asset('images/Dice$leftDice.png'),
-            ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text(
+                'Click on the dices to change them',
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+            ],
           ),
-          Expanded(
-            child: TextButton(
-              onPressed: () {
-                changeDices();
-              },
-              child: Image.asset('images/Dice$rightDice.png'),
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: TextButton(
+                onPressed: () {
+                  setState(() {
+                    leftDice = Random().nextInt(6) + 1;
+                  });
+                },
+                child: Image(
+                  image: AssetImage('images/Dice$leftDice.png'),
+                ),
+              ),
             ),
-          ),
-        ],
-      ),
+            Expanded(
+              child: TextButton(
+                onPressed: () {
+                  setState(() {
+                    rightDice = Random().nextInt(6) + 1;
+                  });
+                },
+                child: Image(
+                  image: AssetImage('images/Dice$rightDice.png'),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
